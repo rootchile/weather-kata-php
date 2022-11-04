@@ -25,3 +25,9 @@ make complexity
 ```text
 make tests
 ```
+
+## Run using Docker
+```bash
+docker build -t php8 .
+docker run --name php8 -ti --rm -v $PWD:/home php8 /bin/bash
+```
