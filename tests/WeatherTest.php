@@ -15,7 +15,8 @@ class WeatherTest extends TestCase
 
         $prediction = $forecast->predict($city);
 
-        $this->assertEquals('sunny', $prediction);
+        $this->assertEquals('sunny', $prediction->getWeatherStateName());
+        $this->assertEquals(60.0, $prediction->getWindSpeed());
     }
 
     /** @test */
@@ -26,29 +27,8 @@ class WeatherTest extends TestCase
 
         $prediction = $forecast->predict($city, new \DateTime('+2 days'));
 
-        $this->assertEquals('sunny', $prediction );
-    }
-
-/** @test */
-    public function find_the_wind_of_any_day()
-    {
-        $forecast = new Forecast();
-        $city = "Madrid";
-
-        $prediction = $forecast->predict($city, null, true);
-
-        $this->assertEquals(60.0, $prediction);
-    }
-
-    /** @test */
-    public function change_the_city_to_woeid()
-    {
-        $forecast = new Forecast();
-        $city = "Madrid";
-
-        $forecast->predict($city, null, true);
-
-        $this->assertEquals("766273", $city);
+        $this->assertEquals('sunny', $prediction->getWeatherStateName());
+        $this->assertEquals(40.0, $prediction->getWindSpeed());
     }
 
     /** @test */
@@ -59,6 +39,6 @@ class WeatherTest extends TestCase
 
         $prediction = $forecast->predict($city, new \DateTime('+6 days'));
 
-        $this->assertEquals("", $prediction);
+        $this->assertEquals([], $prediction);
     }
 }
